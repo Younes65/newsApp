@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_application_1/models/article_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,12 +13,11 @@ class News extends StatefulWidget {
 }
 
 class _News extends State<News> {
-  var news = [];
-  var snack = SnackBar(content: Text('jdkahlsdh'));
+  List<Article> news = [];
+
   @override
   void initState() {
     getData();
-    //checkInternet();
     super.initState();
   }
 
@@ -31,7 +32,7 @@ class _News extends State<News> {
         body: SizedBox(
           child: Center(
               child: news.isEmpty
-                  ? Text('loading...')
+                  ? RefreshProgressIndicator()
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView.separated(
@@ -52,7 +53,7 @@ class _News extends State<News> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Text(
-                                          news[index],
+                                          news[index].title,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 13,
@@ -60,6 +61,19 @@ class _News extends State<News> {
                                         ),
                                       ),
                                     ),
+                                    Container(
+                                      alignment: Alignment.topCenter,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(
+                                          news[index].author,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    )
                                   ]),
                                 ),
                               ),
@@ -85,16 +99,11 @@ class _News extends State<News> {
           'https://newsapi.org/v2/top-headlines?country=eg&apiKey=079e6b9a8de742c2a58121f07d0adfc7'),
     );
     var data = jsonDecode(response.body);
-    var dataList = data['articles'];
+    List<dynamic> dataList = data['articles'];
     setState(() {
-      for (var item in dataList) {
-        var title = item['title'];
-
-        news.add(title);
-      }
+      news = dataList.map((dynamic item) => Article.fromJson(item)).toList();
     });
   }
-
   // Future checkInternet() async {
   //   var connectivity = await Connectivity().checkConnectivity();
   //   if (connectivity == ConnectivityResult.none) {

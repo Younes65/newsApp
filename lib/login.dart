@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/route.dart';
-
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -16,7 +15,7 @@ class _Login extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
+    var mediaQery = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Form(
@@ -30,6 +29,7 @@ class _Login extends State<Login> {
                 margin: EdgeInsets.all(15),
                 alignment: Alignment.topRight,
                 child: IconButton(
+                    color: Colors.red,
                     onPressed: () {
                       setState(() {
                         showDialog(
@@ -61,15 +61,14 @@ class _Login extends State<Login> {
                         margin: EdgeInsets.all(15.0),
                         child: Image.asset(
                           'assets/user.png',
-                          color: Color.fromARGB(255, 1, 78, 140),
-                          filterQuality: FilterQuality.high,
+                          color: Colors.red,
                         ),
                       ),
                       Text('Login',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 30,
-                              color: Color.fromARGB(255, 1, 78, 140))),
+                              color: Colors.red)),
                       SizedBox(height: 20),
                       TextFormField(
                           validator: (String? input) {
@@ -84,10 +83,11 @@ class _Login extends State<Login> {
                           },
                           controller: emailController,
                           decoration: InputDecoration(
-                              labelText: "Enter user name",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              prefixIcon: Icon(Icons.email_sharp))),
+                            labelText: "Enter user name",
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            prefixIcon: Icon(Icons.email_sharp),
+                          )),
                       SizedBox(height: 15),
                       TextFormField(
                         obscureText: !visible,
@@ -118,7 +118,7 @@ class _Login extends State<Login> {
                           style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
                               shape: StadiumBorder(),
-                              backgroundColor: Color.fromARGB(255, 1, 78, 140)),
+                              backgroundColor: Colors.red),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               Navigator.pushReplacement(context, createRoute());
