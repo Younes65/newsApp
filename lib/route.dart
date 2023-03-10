@@ -3,6 +3,8 @@ import 'package:flutter_application_1/categories/health.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/categories/news.dart';
 import 'package:flutter_application_1/categories/sports.dart';
+import 'package:flutter_application_1/login.dart';
+import 'package:flutter_application_1/splash_screen.dart';
 
 Route createRoute() {
   return PageRouteBuilder(
@@ -61,6 +63,24 @@ Route createRoute3() {
 Route createRoute4() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => Health(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
+Route createRoute5() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => Login(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;

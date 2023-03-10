@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login.dart';
+import 'package:flutter_application_1/route.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +15,8 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 4500));
   }
 
   @override
@@ -31,10 +33,8 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
           Lottie.asset("assets/news.json", controller: _controller,
               onLoaded: (compos) {
             _controller
-              ..duration = compos.duration
-              ..forward().then((value) => Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => Login())));
+              ..forward().then((value) =>
+                  Navigator.of(context).pushReplacement(createRoute5()));
           }),
           SizedBox(
             height: 10,

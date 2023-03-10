@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/article_model.dart';
 import 'package:http/http.dart' as http;
 
 // Welcome screen
@@ -10,7 +11,7 @@ class Sportss extends StatefulWidget {
 }
 
 class _Sports extends State<Sportss> {
-  var news = [];
+  List<Article> news = [];
   var snack = SnackBar(content: Text('jdkahlsdh'));
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _Sports extends State<Sportss> {
         body: SizedBox(
           child: Center(
               child: news.isEmpty
-                  ? Text('loading...')
+                  ? RefreshProgressIndicator()
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView.separated(
@@ -41,21 +42,31 @@ class _Sports extends State<Sportss> {
                                 child: SizedBox(
                                   width: double.infinity,
                                   height: 200,
-                                  child: Stack(children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Text(
-                                          news[index],
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Text(
+                                            news[index].author,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ]),
+                                        Container(
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Text(
+                                            news[index].title,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ]),
                                 ),
                               ),
                             );
@@ -80,12 +91,9 @@ class _Sports extends State<Sportss> {
           'https://newsapi.org/v2/top-headlines?country=eg&category=sports&apiKey=079e6b9a8de742c2a58121f07d0adfc7'),
     );
     var data = jsonDecode(response.body);
-    var dataList = data['articles'];
+    List<dynamic> dataList = data['articles'];
     setState(() {
-      for (var item in dataList) {
-        String title = item['title'];
-        news.add(title);
-      }
+      news = dataList.map((item) => Article.fromJson(item)).toList();
     });
   }
 

@@ -25,10 +25,6 @@ class _News extends State<News> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome screen'),
-          backgroundColor: Color.fromARGB(255, 1, 78, 140),
-        ),
         body: SizedBox(
           child: Center(
               child: news.isEmpty

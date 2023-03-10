@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/article_model.dart';
 import 'package:http/http.dart' as http;
 
 // Welcome screen
@@ -10,8 +11,7 @@ class Health extends StatefulWidget {
 }
 
 class _Health extends State<Health> {
-  var news = [];
-  var snack = SnackBar(content: Text('jdkahlsdh'));
+  List<Article> news = [];
   @override
   void initState() {
     getData();
@@ -26,7 +26,7 @@ class _Health extends State<Health> {
         body: SizedBox(
           child: Center(
               child: news.isEmpty
-                  ? Text('loading...')
+                  ? RefreshProgressIndicator()
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView.separated(
@@ -41,20 +41,31 @@ class _Health extends State<Health> {
                                 child: SizedBox(
                                   width: double.infinity,
                                   height: 200,
-                                  child: Stack(children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Center(
-                                        child: Text(
-                                          news[index],
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            news[index].author,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ]),
+                                        Container(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            news[index].title,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ]),
                                 ),
                               ),
                             );
@@ -79,12 +90,9 @@ class _Health extends State<Health> {
           'https://newsapi.org/v2/top-headlines?country=eg&category=health&apiKey=079e6b9a8de742c2a58121f07d0adfc7'),
     );
     var data = jsonDecode(response.body);
-    var dataList = data['articles'];
+    List<dynamic> dataList = data['articles'];
     setState(() {
-      for (var item in dataList) {
-        String title = item['title'];
-        news.add(title);
-      }
+      news = dataList.map((item) => Article.fromJson(item)).toList();
     });
   }
 
