@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/route.dart';
 
@@ -61,117 +63,79 @@ class _Home extends State<Home> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(createRoute2());
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    elevation: 5,
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 200,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'assets/general.jpg',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'General',
-                              style: TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
+                  onTap: () => Navigator.of(context).push(createRoute2()),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: AssetImage('assets/general.jpg'),
+                            fit: BoxFit.cover)),
+                    child: Center(
+                      child: Text(
+                        'General',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(createRoute3());
                   },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    elevation: 5,
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 200,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'assets/sports.jpg',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Sports',
-                              style: TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: AssetImage('assets/sports.jpg'),
+                            fit: BoxFit.cover)),
+                    child: Center(
+                      child: Text(
+                        'Sprots',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(createRoute4());
                   },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    elevation: 5,
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 200,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'assets/health.jpg',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Health',
-                              style: TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: AssetImage('assets/health.jpg'),
+                            fit: BoxFit.cover)),
+                    child: Center(
+                      child: Text(
+                        'Health',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ),
                   ),

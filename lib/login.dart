@@ -130,6 +130,52 @@ class _Login extends State<Login> {
                                 fontSize: 28, fontWeight: FontWeight.bold),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Divider(
+                        height: 1,
+                      ),
+                      Text(
+                        'OR',
+                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Image.asset(
+                              'assets/Google.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                image: DecorationImage(
+                                    image: AssetImage('assets/facebook.png'),
+                                    fit: BoxFit.cover)),
+                          ),
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    image: AssetImage('assets/link.png'),
+                                    fit: BoxFit.cover)),
+                          )
+                        ],
                       )
                     ],
                   ),
