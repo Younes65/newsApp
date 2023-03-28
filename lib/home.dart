@@ -2,6 +2,9 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/route.dart';
+import 'package:flutter_application_1/user_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,10 +12,15 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  var c = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Obx(() => Text("${c.email}")),
+        ),
         backgroundColor: Color.fromARGB(255, 221, 220, 220),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),

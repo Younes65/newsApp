@@ -29,8 +29,11 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Lottie.asset("assets/news.json", controller: _controller,
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+          Lottie.asset("assets/news.json",
+              controller: _controller,
               onLoaded: (compos) {
             _controller
               ..forward().then((value) =>

@@ -3,6 +3,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/models/article_model.dart';
+import 'package:flutter_application_1/user_controller.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,11 +15,10 @@ class News extends StatefulWidget {
 }
 
 class _News extends State<News> {
-  List<Article> news = [];
-
+  var c = Get.put(Controller());
   @override
   void initState() {
-    getData();
+    c.getData();
     super.initState();
   }
 
@@ -27,7 +28,7 @@ class _News extends State<News> {
       child: Scaffold(
         body: SizedBox(
           child: Center(
-              child: news.isEmpty
+              child: c.news.isEmpty
                   ? RefreshProgressIndicator()
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -49,7 +50,7 @@ class _News extends State<News> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Text(
-                                          news[index].title,
+                                          c.news[index].title,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 13,
@@ -62,7 +63,7 @@ class _News extends State<News> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Text(
-                                          news[index].author,
+                                          c.news[index].author,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 15,
@@ -82,24 +83,13 @@ class _News extends State<News> {
                               width: double.infinity,
                             );
                           },
-                          itemCount: news.length),
+                          itemCount: c.news.length),
                     )),
         ),
       ),
     );
   }
 
-  getData() async {
-    var response = await http.get(
-      Uri.parse(
-          'https://newsapi.org/v2/top-headlines?country=eg&apiKey=079e6b9a8de742c2a58121f07d0adfc7'),
-    );
-    var data = jsonDecode(response.body);
-    List<dynamic> dataList = data['articles'];
-    setState(() {
-      news = dataList.map((dynamic item) => Article.fromJson(item)).toList();
-    });
-  }
   // Future checkInternet() async {
   //   var connectivity = await Connectivity().checkConnectivity();
   //   if (connectivity == ConnectivityResult.none) {

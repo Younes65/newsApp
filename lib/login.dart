@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/route.dart';
+import 'package:flutter_application_1/user_controller.dart';
+import 'package:get/get.dart';
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -8,9 +10,11 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
+  var c = Get.put(Controller());
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool visible = false;
 
   @override
@@ -122,6 +126,7 @@ class _Login extends State<Login> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               Navigator.pushReplacement(context, createRoute());
+                              c.pushEmail(emailController.text);
                             }
                           },
                           child: Text(
@@ -132,17 +137,14 @@ class _Login extends State<Login> {
                         ),
                       ),
                       SizedBox(
-                        height: 5,
-                      ),
-                      Divider(
-                        height: 1,
+                        height: 15,
                       ),
                       Text(
                         'OR',
                         style: TextStyle(fontSize: 15, color: Colors.grey),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
