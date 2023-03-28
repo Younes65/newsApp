@@ -3,7 +3,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/models/article_model.dart';
-import 'package:flutter_application_1/user_controller.dart';
+import 'package:flutter_application_1/utils/user_controller.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
